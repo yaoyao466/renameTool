@@ -69,12 +69,12 @@ def rename(path, file, index):
     os.rename(old_name, new_name)
 
 #对某个文件随机重命名
-def rename_rand(path, file):
+def rename_rand(path, file, index):
     global type_str
     old_name = path + "\\" + file
     print("old_name:" + old_name)
     while(True):
-        new_name = path + "\\" + path.rsplit('\\', 1)[1] + "-rand" + str(random.randint(500000, 10000000)) + type_str
+        new_name = path + "\\" + path.rsplit('\\', 1)[1] + "-rand-" + str(index) + "-" + str(random.randint(500000, 10000000)) + type_str
         if (False == os.path.exists(new_name)):
             os.rename(old_name, new_name)
             print("rand_name:" + new_name)
@@ -90,10 +90,10 @@ def opr_file_name(file_dir, is_rand):
             if (True == is_same_type(file)):
                 #第一遍修改为随机名，确保第二次修改成功
                 if (is_rand):
-                    rename_rand(root, file)
+                    rename_rand(root, file, index)
                 else:
                     rename(root, file, index)
-                    index += 1
+                index += 1
 
 #点击确定后要执行的函数
 def run():
@@ -125,7 +125,7 @@ def run():
 
 #创建主窗口
 window = Tk()
-window.title("批量文件重命名工具")         #标题设置
+window.title("批量文件重命名工具V1.2.0")         #标题设置
 window.geometry('470x120')              #设置窗口大小为900x500 横纵尺寸
 window.resizable(0, 0)                  #固定大小
 
